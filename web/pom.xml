@@ -14,7 +14,9 @@
 
   <properties>
     <jersey.version>2.11</jersey.version>
-    
+    <maven.tomcat.update>true</maven.tomcat.update>
+    <tomcat.username>tomcat</tomcat.username>
+    <tomcat.password>tomcat</tomcat.password>
   </properties>
   <dependencies>
     <dependency>
