@@ -8,7 +8,6 @@ import org.drb.porto.db.PopulateDB;
 @Path("/v1/populate")
 public class Populate
 {
-   
     @GET
     public String populate() 
     {
