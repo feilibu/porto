@@ -1,12 +1,18 @@
 <html>
 <head>
-<title>jQuery Hello World</title>
+<title>Porto</title>
 <script type="text/javascript"
 	src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript"
 	src=" //code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+<script type="text/javascript"
+	src="http://code.highcharts.com/stock/highstock.js"></script>
+<script type="text/javascript"
+	src="http://code.highcharts.com/stock/modules/exporting.js"></script>
 <link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.11.1/themes/black-tie/jquery-ui.css">
+	href="http://code.jquery.com/ui/1.11.1/themes/black-tie/jquery-ui.css" />
+
+
 <style>
 .ui-menu {
 	width: 200px;
@@ -17,12 +23,45 @@
 <body>
 	<script type="text/javascript">
 		function onTestSuccess(data) {
-			alert("toto;" + data.toto + ";titi;" + data.titi)
+			alert("toto")
 		}
 
+		function onTestHighstocks() {
+			$.getJSON(
+			'/web/rest/v1/test?callback=?', function(data) {
+				// Create the chart
+				window.chart = new Highcharts.StockChart({
+					chart : {
+						renderTo : 'container'
+					},
+
+					rangeSelector : {
+						selected : 1
+					},
+
+					title : {
+						text : 'Afei Stock Price'
+					},
+
+					series : [ {
+						name : 'AAPL',
+						data : data,
+						tooltip : {
+							valueDecimals : 2
+						}
+					} ]
+				});
+			});
+		}
+
+		function onTestFailure(jqXHR, status, error) {
+			alert("Error in test;" + status + ";" + error)
+		}
 		function onTest() {
 			$.ajax("/web/rest/v1/test").done(function(data) {
 				onTestSuccess(data)
+			}).fail(function(jqXHR, status, error) {
+				onTestFailure(jqXHR, status, error)
 			})
 		}
 
@@ -37,7 +76,7 @@
 		}
 
 		function onGraph() {
-			alert('graph')
+			onTestHighstocks()
 		}
 
 		function onSelect(event, ui) {
@@ -64,5 +103,6 @@
 		<li id="populate">Populate</li>
 		<li id="graph">Graph</li>
 	</ul>
+	<div id="container" style="height: 400px; min-width: 310px"></div>
 </body>
 </html>
