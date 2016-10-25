@@ -27,36 +27,40 @@
 		}
 
 		function onTestHighstocks() {
-			$.getJSON(
-			'/web/rest/v1/test?callback=?', function(data) {
-				// Create the chart
-				window.chart = new Highcharts.StockChart({
-					chart : {
-						renderTo : 'container'
-					},
+			$.getJSON('/web/rest/v1/test?callback=?', function(data) {
+				createChart(data)
+			})
+		}
 
-					rangeSelector : {
-						selected : 1
-					},
+		function createChart(data) {
+			// Create the chart
+			window.chart = new Highcharts.StockChart({
+				chart : {
+					renderTo : 'container'
+				},
 
-					title : {
-						text : 'Afei Stock Price'
-					},
+				rangeSelector : {
+					selected : 1
+				},
 
-					series : [ {
-						name : 'AAPL',
-						data : data,
-						tooltip : {
-							valueDecimals : 2
-						}
-					} ]
-				});
-			});
+				title : {
+					text : 'Afei Stock Price'
+				},
+
+				series : [ {
+					name : 'AAPL',
+					data : data,
+					tooltip : {
+						valueDecimals : 2
+					}
+				} ]
+			})
 		}
 
 		function onTestFailure(jqXHR, status, error) {
 			alert("Error in test;" + status + ";" + error)
 		}
+
 		function onTest() {
 			$.ajax("/web/rest/v1/test").done(function(data) {
 				onTestSuccess(data)

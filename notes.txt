@@ -1,6 +1,22 @@
+mvn package && mvn tomcat7:run -Dmaven.tomcat.port=9090
+
+http://localhost:9090/web/
 
 
 Bitbucket repository
 
    https://bitbucket.org/philippe_bonneau/porto/wiki/Home
    Login using google account
+
+
+
+Launching tomcat
+ mvn tomcat7:run -Dmaven.tomcat.port=9090
+
+Launching cmd line
+
+  mvn exec:java -Dexec.args=populate
+
+
+
+
