@@ -24,6 +24,11 @@
       <artifactId>backend</artifactId>
       <version>03.00</version>
     </dependency>
+    <dependency>
+      <groupId>org.drb</groupId>
+      <artifactId>porto.main</artifactId>
+      <version>02.00</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>

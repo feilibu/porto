@@ -6,6 +6,7 @@
   <packaging>war</packaging>
   <version>03.00</version>
 
+
   <parent>
     <groupId>org.drb.porto</groupId>
     <artifactId>parent-pom</artifactId>
@@ -13,10 +14,13 @@
   </parent>
 
   <properties>
+    <assertj.version>3.3.0</assertj.version>
     <jersey.version>2.11</jersey.version>
     <maven.tomcat.update>true</maven.tomcat.update>
+    <maven-failsafe-plugin.version>2.19.1</maven-failsafe-plugin.version>
     <tomcat.username>tomcat</tomcat.username>
     <tomcat.password>tomcat</tomcat.password>
+    <rest-assured.version>2.9.0</rest-assured.version>
   </properties>
   <dependencies>
     <dependency>
@@ -39,13 +43,62 @@
       <artifactId>guava</artifactId>
       <version>17.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.jayway.restassured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>${rest-assured.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${assertj.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${maven-failsafe-plugin.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
         <artifactId>tomcat7-maven-plugin</artifactId>
         <version>2.2</version>
+        <configuration>
+          <path>/</path>
+          <port>9090</port>
+        </configuration>
+        <executions>
+          <execution>
+            <id>start-tomcat</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <fork>true</fork>
+            </configuration>
+          </execution>
+          <execution>
+            <id>stop-tomcat</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>shutdown</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

@@ -24,7 +24,7 @@ public class Test
    public String test1(@QueryParam("callback") String callback) throws IOException
    {
       URL url = Resources.getResource("hs-example.json");
-      return callback + "(" + Resources.toString(url, Charsets.UTF_8) + ");";
+      return callback + "([" + Resources.toString(url, Charsets.UTF_8) + "]);";
    }
 
    static class TestData
