@@ -1,4 +1,4 @@
-package org.drb.porto.chart;
+package org.drb.porto.interfaces.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
