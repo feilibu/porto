@@ -27,25 +27,20 @@
 		}
 
 		function onTestHighstocks() {
-                        console.log("1")
-			$.getJSON('/rest/v1/test?callback=?', function(ohlc) {
-                           console.log("2")
+			$.getJSON('/rest/v1/stock/ADP.PA?callback=?', function(ohlc) {
 			   data = createData(ohlc);
-                           console.log("size(data) = " + data.length);
-                           createChart(data);
+			   console.log("ohlc.length=" + data.ohlc.length);
+               createChart(data);
 			})
 		}
 
-
                 function createData(data) {
-                  console.log("coucou")
                   // split the data set into ohlc and volume
                   var ohlc = [],
                       volume = [],
                       dataLength = data.length,
                       i = 0;
           
-                  console.log("starting");
                   for (i; i < dataLength; i += 1) {
                       ohlc.push([
                           data[i][0], // the date
@@ -60,10 +55,6 @@
                           data[i][5] // the volume
                       ]);
                   }
-                  console.log("ending");
-                  console.log("ohlc size = " + ohlc.length)
-                  console.log("volume size = " + volume.length)
-                  console.log("datalength" + dataLength)
                   return { ohlc: ohlc, volume: volume};
                 }
 
@@ -80,9 +71,7 @@
                       ]];
                   var ohlc = data.ohlc;
                   var volume = data.volume;
-                  console.log("ohlc size = " + ohlc.length)
-                  console.log("volume size = " + volume.length)
-          
+
                   $('#container').highcharts('StockChart', {
           
                       rangeSelector: {
