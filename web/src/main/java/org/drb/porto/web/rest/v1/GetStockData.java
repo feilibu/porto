@@ -16,7 +16,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Path("/v1/stock/{ticker}")
-
 public class GetStockData
 {
     @GET

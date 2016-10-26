@@ -1,0 +1,50 @@
+{
+  "rangeSelector": {
+    "selected": 1
+  },
+
+  "title": {
+     "text": "Title"
+  },
+
+  "yAxis": [{
+       "labels": {
+           "align": "right",
+           "x": -3
+       },
+       "title": {
+           "text": "OHLC"
+       },
+       "height": "60%",
+       "lineWidth": 2
+   }, {
+       "labels": {
+           "align": "right",
+           "x": -3
+       },
+       "title": {
+           "text": "Volume"
+       },
+       "top": "65%",
+       "height": "35%",
+       "offset": 0,
+       "lineWidth": 2
+   }],
+
+   "series": [{
+       "type": "candlestick",
+       "name": "AAPL",
+       "data": {},
+       "dataGrouping": {
+           "units": "groupingUnits"
+       }
+   }, {
+       "type": "column",
+       "name": "Volume",
+       "data": {},
+       "yAxis": 1,
+       "dataGrouping": {
+           "units": "groupingUnits"
+       }
+   }]
+}
