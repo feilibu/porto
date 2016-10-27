@@ -29,7 +29,6 @@
 		function onTestHighstocks(config,symbol) {
 			$.getJSON('/rest/v1/stock/' + symbol + '?callback=?', function(ohlc) {
 			   data = createData(ohlc);
-			   console.log("ohlc.length=" + data.ohlc.length);
                createChart(config,data);
 			})
 		}
