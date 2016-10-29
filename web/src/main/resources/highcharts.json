@@ -15,9 +15,9 @@
        "title": {
            "text": "OHLC"
        },
-       "height": "60%",
+       "height": "80%",
        "lineWidth": 2
-   }, {
+       }, {
        "labels": {
            "align": "right",
            "x": -3
@@ -26,14 +26,14 @@
            "text": "Volume"
        },
        "top": "65%",
-       "height": "35%",
+       "height": "20%",
        "offset": 0,
        "lineWidth": 2
    }],
 
    "series": [{
        "type": "candlestick",
-       "name": "AAPL",
+       "name": "",
        "data": {},
        "dataGrouping": {
            "units": "groupingUnits"

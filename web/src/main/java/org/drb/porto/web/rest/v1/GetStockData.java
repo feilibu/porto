@@ -51,23 +51,23 @@ public class GetStockData
         double[] ohlcC = q.GetValues(Quotes.CLOSE);
         int[] volumes = q.GetVolumes();
         for(int n = 0 ; n < allDates.length ; n++) {
-            appendRecord(sb, allDates, ohlcO[n], ohlcH[n], ohlcL[n], ohlcC[n], volumes[n], n);
+            appendRecord(sb, allDates[n], ohlcO[n], ohlcH[n], ohlcL[n], ohlcC[n], volumes[n], n);
+            if(n<allDates.length-1)
+                sb.append(",");
+            sb.append("\n");
         }
         return sb.toString();
     }
 
-    private void appendRecord(StringBuilder sb, Date[] allDates, double o, double h, double l, double c, int volume, int n) {
+    private void appendRecord(StringBuilder sb, Date date, double o, double h, double l, double c, int volume, int n) {
         sb.append("[");
-        sb.append(allDates[n].getTime());
+        sb.append(date.getTime() + 8 * 3600 * 1000L);
         append(sb, o);
         append(sb, h);
         append(sb, l);
         append(sb, c);
         append(sb, volume);
         sb.append("]");
-        if(n < allDates.length -1)
-            sb.append(",");
-        sb.append("\n");
     }
 
     private void append(StringBuilder sb, double d) {

@@ -29,7 +29,7 @@
 		function onTestHighstocks(config,symbol) {
 			$.getJSON('/rest/v1/stock/' + symbol + '?callback=?', function(ohlc) {
 			   data = createData(ohlc);
-               createChart(config,data);
+               createChart(config, symbol, data);
 			})
 		}
 
@@ -57,7 +57,7 @@
           return { ohlc: ohlc, volume: volume};
         }
 
-		function createChart(config, data) {
+		function createChart(config, symbol, data) {
           // create the chart
           // set the allowed units for data grouping
           var groupingUnits = [[
@@ -70,6 +70,7 @@
           var ohlc = data.ohlc;
           var volume = data.volume;
           config.series[0].data = data.ohlc;
+          config.series[0].name = symbol;
           config.series[1].data = data.volume;
           $('#container').highcharts('StockChart', config);
         }
@@ -130,6 +131,6 @@
 		<li id="populate">Populate</li>
 		<li id="graph">Graph</li>
 	</ul>
-	<div id="container" style="height: 400px; min-width: 310px"></div>
+	<div id="container" style="height: 600px; min-width: 310px"></div>
 </body>
 </html>
