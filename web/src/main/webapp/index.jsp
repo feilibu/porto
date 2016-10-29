@@ -29,7 +29,9 @@
 		function onTestHighstocks(config,symbol) {
 			$.getJSON('/rest/v1/stock/' + symbol + '?callback=?', function(ohlc) {
 			   data = createData(ohlc);
+			   console.log("coucou1");
                createChart(config, symbol, data);
+			   console.log("coucou2");
 			})
 		}
 
@@ -99,38 +101,32 @@
 			})
 		}
 
-		function onGraph() {
+		function onGraph(symbol) {
 		   $.getJSON('/rest/v1/config/highcharts', function(config) {
-		      symbol = 'KER.PA';
+ 		      console.log("coucou" + "**" + symbol);
               config.title.text = symbol;
               onTestHighstocks(config, symbol);
            })
 		}
 
-		function onSelect(event, ui) {
-			if (ui.item[0].id == 'populate') {
-				onPopulate()
-			} else if (ui.item[0].id == 'graph') {
-				onGraph()
-			} else if (ui.item[0].id == 'test') {
-				onTest()
-			}
-		}
+		function onOptionChange(e) {
+		    onGraph(e.target.value);
+        }
 
-		$(document).ready(function() {
-			$("#Menu").menu({
-				select : function(event, ui) {
-					onSelect(event, ui)
-				}
-			})
-		})
+        function setupMenu() {
+            $.getJSON('/rest/v1/stocks', function(stocks) {
+                          for (stock of stocks) {
+              		        $("#Menu").append($('<option>').text(stock.label)
+              		                                       .attr('value', stock.symbol));
+                          }
+                          $("#Menu").change(onOptionChange);
+                       })
+        }
+
+		$(document).ready(setupMenu)
 	</script>
 
-	<ul id="Menu">
-		<li id="test">Test</li>
-		<li id="populate">Populate</li>
-		<li id="graph">Graph</li>
-	</ul>
 	<div id="container" style="height: 600px; min-width: 310px"></div>
+	<form id="MenuForm"><select id="Menu"/></form>
 </body>
 </html>
