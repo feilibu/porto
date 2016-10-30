@@ -3,10 +3,7 @@ package org.drb.porto.base;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 
 import org.drb.porto.db.DBAccess;
 import org.slf4j.Logger;
@@ -118,7 +115,7 @@ public class Quotes implements Comparable<Quotes>
       ArrayList<Date> vDates = new ArrayList<Date>();
       while (rs.next())
       {
-         Date d = new Date(rs.getDate(1).getTime());
+         Date d = NormalizeDate(rs.getDate(1).getTime());
          vDates.add(d);
 
          vValues.add(new Double(rs.getDouble(2)));
@@ -149,15 +146,17 @@ public class Quotes implements Comparable<Quotes>
          m_daLow[i] = GetDoubleValue(vValues, n + 3);
          m_naVolume[i] = GetIntValue(vValues, n + 4);
          n += 5;
-         m_hmByDate.put(NormalizeDate(m_daDates[i]), new Integer(i));
+         m_hmByDate.put(m_daDates[i], new Integer(i));
       }
    }
 
-   private Date NormalizeDate(Date d)
+   private Date NormalizeDate(long time)
    {
       synchronized (m_c)
       {
-         m_c.setTime(d);
+         m_c.setTime(new Date(time));
+         m_c.setTimeZone(TimeZone.getTimeZone("UTC"));
+         m_c.add(Calendar.HOUR,12);
          m_c.set(Calendar.HOUR_OF_DAY, 0);
          m_c.set(Calendar.MINUTE, 0);
          m_c.set(Calendar.SECOND, 0);
@@ -169,7 +168,7 @@ public class Quotes implements Comparable<Quotes>
 
    public int GetIndexForDate(Date d)
    {
-      Integer i = m_hmByDate.get(NormalizeDate(d));
+      Integer i = m_hmByDate.get(NormalizeDate(d.getTime()));
       if (i == null)
          return -1;
       return i;

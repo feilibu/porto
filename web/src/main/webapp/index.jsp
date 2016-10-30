@@ -51,6 +51,7 @@
                   data[i][4] // close
               ]);
 
+                console.log("Date:" + data[i][0]);
               volume.push([
                   data[i][0], // the date
                   data[i][5] // the volume
