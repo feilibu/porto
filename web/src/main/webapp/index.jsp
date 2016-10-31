@@ -6,9 +6,7 @@
 <script type="text/javascript"
 	src="//code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
 <script type="text/javascript"
-	src="http://code.highcharts.com/stock/highstock.js"></script>
-<script type="text/javascript"
-	src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+	src="http://code.highcharts.com/stock/5.0.2/highstock.js"></script>
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.11.1/themes/black-tie/jquery-ui.css" />
 
@@ -103,7 +101,6 @@
 
 		function onGraph(symbol) {
 		   $.getJSON('/rest/v1/config/highcharts', function(config) {
- 		      console.log("coucou" + "**" + symbol);
               config.title.text = symbol;
               onTestHighstocks(config, symbol);
            })

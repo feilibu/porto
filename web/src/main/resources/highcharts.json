@@ -34,17 +34,11 @@
    "series": [{
        "type": "candlestick",
        "name": "",
-       "data": {},
-       "dataGrouping": {
-           "units": "groupingUnits"
-       }
+       "data": {}
    }, {
        "type": "column",
        "name": "Volume",
        "data": {},
-       "yAxis": 1,
-       "dataGrouping": {
-           "units": "groupingUnits"
-       }
+       "yAxis": 1
    }]
 }
