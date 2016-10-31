@@ -61,9 +61,7 @@ public class GetStockData
 
     private void appendRecord(StringBuilder sb, Date date, double o, double h, double l, double c, int volume, int n) {
         sb.append("[");
-        //sb.append(date.getTime() + 8 * 3600 * 1000L);
         sb.append(date.getTime());
-        System.err.println("Date:" + date);
         append(sb, o);
         append(sb, h);
         append(sb, l);

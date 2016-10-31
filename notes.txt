@@ -18,5 +18,9 @@ Launching cmd line
   mvn exec:java -Dexec.args=populate
 
 
+Updating SRD list:
+Download "SRD", "SRD long only" to /tmp/libelles.csv
+http://www.abcbourse.com/download/libelles.aspx
 
+mysql -u root -p porto < cli/target/classes/sql/refresh-srd.sql
 

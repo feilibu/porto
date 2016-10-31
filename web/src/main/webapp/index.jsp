@@ -27,11 +27,11 @@
 		}
 
 		function onTestHighstocks(config,symbol) {
-			$.getJSON('/rest/v1/stock/' + symbol + '?callback=?', function(ohlc) {
+		    //var url = '/rest/v1/test?callback=?';
+		    var url = '/rest/v1/stock/' + symbol + '?callback=?';
+			$.getJSON(url, function(ohlc) {
 			   data = createData(ohlc);
-			   console.log("coucou1");
                createChart(config, symbol, data);
-			   console.log("coucou2");
 			})
 		}
 
@@ -51,7 +51,6 @@
                   data[i][4] // close
               ]);
 
-                console.log("Date:" + data[i][0]);
               volume.push([
                   data[i][0], // the date
                   data[i][5] // the volume
