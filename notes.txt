@@ -1,3 +1,14 @@
+Migration porto2 into porto3 repo
+Migrate bitbucket -> gitlab
+Install on vps
+Cron automatic daily population
+Default daily graph -> 1 year
+Database backup
+Cron automatic weekly SRD update
+Create evaluation scala project
+
+
+
 mvn package && mvn tomcat7:run -Dmaven.tomcat.port=9090
 
 http://localhost:9090/web/
