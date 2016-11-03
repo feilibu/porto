@@ -1,5 +1,5 @@
 * Migration porto2 into porto3 repo
-Default daily graph -> 1 year
+* Default daily graph -> 1 year
 Migrate bitbucket -> gitlab
 Install on vps
 Cron automatic daily population
