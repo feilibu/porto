@@ -1,8 +1,8 @@
-Migration porto2 into porto3 repo
+* Migration porto2 into porto3 repo
+Default daily graph -> 1 year
 Migrate bitbucket -> gitlab
 Install on vps
 Cron automatic daily population
-Default daily graph -> 1 year
 Database backup
 Cron automatic weekly SRD update
 Create evaluation scala project
@@ -34,4 +34,7 @@ Download "SRD", "SRD long only" to /tmp/libelles.csv
 http://www.abcbourse.com/download/libelles.aspx
 
 mysql -u root -p porto < cli/target/classes/sql/refresh-srd.sql
+
+... or ...
+ org.drb.porto.db.GetSRDList.DoGetSRDList
 
