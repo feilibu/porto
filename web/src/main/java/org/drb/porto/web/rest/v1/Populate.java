@@ -1,14 +1,15 @@
 package org.drb.porto.web.rest.v1;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-
 import org.drb.porto.db.PopulateDB;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-@Path("/v1/populate")
+@Controller
+@RequestMapping("/v1/populate")
 public class Populate
 {
-    @GET
+    @RequestMapping(method= RequestMethod.GET,produces = "text/plain")
     public String populate() 
     {
        PopulateDB aPopulate = new PopulateDB( );

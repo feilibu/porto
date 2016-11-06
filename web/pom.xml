@@ -3,13 +3,13 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.drb.porto</groupId>
   <artifactId>web</artifactId>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <version>03.00</version>
 
 
   <parent>
     <groupId>org.drb.porto</groupId>
-    <artifactId>parent-pom</artifactId>
+    <artifactId>parent-pom-springboot</artifactId>
     <version>03.00</version>
   </parent>
 
@@ -28,6 +28,7 @@
       <artifactId>backend</artifactId>
       <version>03.00</version>
     </dependency>
+<!--
     <dependency>
       <groupId>org.glassfish.jersey.media</groupId>
       <artifactId>jersey-media-json-jackson</artifactId>
@@ -38,6 +39,7 @@
       <artifactId>jersey-container-servlet-core</artifactId>
       <version>${jersey.version}</version>
     </dependency>
+-->
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
@@ -49,16 +51,19 @@
       <version>${rest-assured.version}</version>
       <scope>test</scope>
     </dependency>
+<!--
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
       <version>${assertj.version}</version>
       <scope>test</scope>
     </dependency>
+-->
   </dependencies>
 
   <build>
     <plugins>
+<!--
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
@@ -100,6 +105,7 @@
           </execution>
         </executions>
       </plugin>
+-->
     </plugins>
   </build>
 </project>

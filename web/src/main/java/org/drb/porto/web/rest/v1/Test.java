@@ -3,15 +3,15 @@ package org.drb.porto.web.rest.v1;
 import java.io.IOException;
 import java.net.URL;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@Path("/v1/test")
+@Controller
+@RequestMapping("/v1/test")
 public class Test
 {
    public TestData test()
@@ -19,9 +19,8 @@ public class Test
       return new TestData("gle", "be");
    }
 
-   @GET
-   @Produces("text/javascript")
-   public String test1(@QueryParam("callback") String callback) throws IOException
+   @RequestMapping(method= RequestMethod.GET, produces="text/javascript")
+   public String test1(@RequestParam("callback") String callback) throws IOException
    {
       URL url = Resources.getResource("hs-example.json");
       return callback + "([" + Resources.toString(url, Charsets.UTF_8) + "]);";

@@ -1,13 +1,13 @@
 package org.drb.porto.web.rest.v1;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
 import org.drb.porto.base.Quotes;
-import org.drb.porto.db.PopulateDB;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.ws.rs.*;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -15,16 +15,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-@Path("/v1/stock/{ticker}")
+@Controller
+@RequestMapping("/v1/stock/{ticker}")
 public class GetStockData
 {
-    @GET
-    @Produces("text/javascript")
+    @RequestMapping(method= RequestMethod.GET,produces = "text/javascript")
     public String getStockData(
-            @PathParam("ticker") String ticker,
-            @QueryParam("start") String startDate,
-            @QueryParam("end") String endDate,
-            @QueryParam("callback") String callback) throws IOException {
+            @PathVariable(name="ticker") String ticker,
+            @RequestParam(name="start") String startDate,
+            @RequestParam(name="end") String endDate,
+            @RequestParam(name="callback") String callback) throws IOException {
         Quotes q = new Quotes();
         Calendar c = Calendar.getInstance();
         c.add(Calendar.YEAR, -3);

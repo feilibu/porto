@@ -1,16 +1,17 @@
 package org.drb.porto.web.rest.v1;
 
+import jxl.HeaderFooter;
 import org.drb.porto.base.StockEntry;
 import org.drb.porto.base.Stocks;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 
-@Path("/v1/stocks")
+@Controller
+@RequestMapping("/v1/stocks")
 public class GetSRDStocks {
-    @GET
-    @Produces("text/json")
+    @RequestMapping(method= RequestMethod.GET, produces= "text/json")
     public String get() {
          StockEntry[] stocks = Stocks.GetAllStockEntries();
          return toJson(stocks);
