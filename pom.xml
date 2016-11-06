@@ -20,6 +20,7 @@
   </build>
   <modules>
     <module>parent</module>
+    <module>parent-springboot</module>
     <module>legacy</module>
     <module>cli</module>
     <module>backend</module>

@@ -1,7 +1,5 @@
-* Migration porto2 into porto3 repo
-* Default daily graph -> 1 year
-Migrate bitbucket -> gitlab
 Install on vps
+  Migrate from tomcat to springboot
 Cron automatic daily population
 Database backup
 Cron automatic weekly SRD update
