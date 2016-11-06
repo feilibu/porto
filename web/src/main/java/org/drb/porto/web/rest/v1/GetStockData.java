@@ -2,10 +2,7 @@ package org.drb.porto.web.rest.v1;
 
 import org.drb.porto.base.Quotes;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -20,16 +17,18 @@ import java.util.Date;
 public class GetStockData
 {
     @RequestMapping(method= RequestMethod.GET,produces = "text/javascript")
-    public String getStockData(
+    public @ResponseBody String getStockData(
             @PathVariable(name="ticker") String ticker,
-            @RequestParam(name="start") String startDate,
-            @RequestParam(name="end") String endDate,
+            @RequestParam(name="start", required = false) String startDate,
+            @RequestParam(name="end", required = false) String endDate,
             @RequestParam(name="callback") String callback) throws IOException {
         Quotes q = new Quotes();
         Calendar c = Calendar.getInstance();
         c.add(Calendar.YEAR, -3);
+        System.err.println("========startDate:" + startDate);
         Date dEnd = parseDate(startDate, new Date());
         Date dStart = parseDate(endDate, c.getTime());
+        System.err.println("========dStart:" + dStart + "=======endDate;" + dEnd);
 
         try {
             q.Acquire(ticker, dStart, dEnd);

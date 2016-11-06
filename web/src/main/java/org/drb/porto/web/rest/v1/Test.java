@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/v1/test")
@@ -20,8 +21,9 @@ public class Test
    }
 
    @RequestMapping(method= RequestMethod.GET, produces="text/javascript")
-   public String test1(@RequestParam("callback") String callback) throws IOException
+   public @ResponseBody String test1(@RequestParam("callback") String callback) throws IOException
    {
+      System.err.println("kiki");
       URL url = Resources.getResource("hs-example.json");
       return callback + "([" + Resources.toString(url, Charsets.UTF_8) + "]);";
    }

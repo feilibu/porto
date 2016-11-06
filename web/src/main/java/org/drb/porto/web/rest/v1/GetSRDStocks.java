@@ -6,13 +6,14 @@ import org.drb.porto.base.Stocks;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
 @RequestMapping("/v1/stocks")
 public class GetSRDStocks {
     @RequestMapping(method= RequestMethod.GET, produces= "text/json")
-    public String get() {
+    public @ResponseBody String get() {
          StockEntry[] stocks = Stocks.GetAllStockEntries();
          return toJson(stocks);
     }

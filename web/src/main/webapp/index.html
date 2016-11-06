@@ -25,8 +25,8 @@
 		}
 
 		function onTestHighstocks(config,symbol) {
-		    //var url = '/rest/v1/test?callback=?';
-		    var url = '/rest/v1/stock/' + symbol + '?callback=?';
+		    //var url = '/v1/test?callback=?';
+		    var url = '/v1/stock/' + symbol + '?callback=?';
 			$.getJSON(url, function(ohlc) {
 			   data = createData(ohlc);
                createChart(config, symbol, data);
@@ -82,7 +82,7 @@
 		}
 
 		function onTest() {
-			$.ajax("/rest/v1/test").done(function(data) {
+			$.ajax("/v1/test").done(function(data) {
 				onTestSuccess(data)
 			}).fail(function(jqXHR, status, error) {
 				onTestFailure(jqXHR, status, error)
@@ -94,13 +94,13 @@
 		}
 
 		function onPopulate() {
-			$.ajax("/rest/v1/populate").done(function(data) {
+			$.ajax("/v1/populate").done(function(data) {
 				onPopulateSuccess(data)
 			})
 		}
 
 		function onGraph(symbol) {
-		   $.getJSON('/rest/v1/config/highcharts', function(config) {
+		   $.getJSON('/v1/config/highcharts', function(config) {
               config.title.text = symbol;
               onTestHighstocks(config, symbol);
            })
@@ -111,7 +111,7 @@
         }
 
         function setupMenu() {
-            $.getJSON('/rest/v1/stocks', function(stocks) {
+            $.getJSON('/v1/stocks', function(stocks) {
                           for (stock of stocks) {
               		        $("#Menu").append($('<option>').text(stock.label)
               		                                       .attr('value', stock.symbol));
