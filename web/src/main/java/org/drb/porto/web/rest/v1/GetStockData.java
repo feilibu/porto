@@ -25,11 +25,8 @@ public class GetStockData
         Quotes q = new Quotes();
         Calendar c = Calendar.getInstance();
         c.add(Calendar.YEAR, -3);
-        System.err.println("========ticker:" + ticker);
-        System.err.println("========startDate:" + startDate);
         Date dEnd = parseDate(startDate, new Date());
         Date dStart = parseDate(endDate, c.getTime());
-        System.err.println("========dStart:" + dStart + "=======endDate;" + dEnd);
 
         try {
             q.Acquire(ticker, dStart, dEnd);

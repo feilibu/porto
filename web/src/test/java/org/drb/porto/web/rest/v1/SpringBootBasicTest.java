@@ -37,7 +37,7 @@ public class SpringBootBasicTest {
    public void shouldReturn200WhenSendingRequestToController() throws Exception {
       @SuppressWarnings("rawtypes")
       ResponseEntity<String> entity = testRestTemplate.getForEntity(
-              "http://localhost:" + port + "/v1/test?callback=toto", String.class);
+              getUrl("test?callback=toto"), String.class);
 
       then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
       String body = entity.getBody();
@@ -59,23 +59,46 @@ public class SpringBootBasicTest {
               .expect()
               .statusCode(200)
               .when()
-              .get("http://localhost:" + port + "/v1/test");
+              .get(getUrl("test"));
       assertThat(r.header("Content-Type")).isEqualTo("text/javascript");
    }
 
+   private String getUrl(String query)
+   {
+      return "http://localhost:" + port + "/v1/" + query;
+   }
+
+
    @Test
-   public void testFromDatabase()
+   public void testStockDataFromDatabase()
    {
       Response r = given()
               .param("callback", "toto")
               .expect()
               .statusCode(200)
               .when()
-              .get("http://localhost:" + port + "/v1/stock/ADP.PA");
+              .get(getUrl("stock/ADP.PA"));
       assertThat(r.header("Content-Type")).contains("text/javascript");
       String s = r.body().asString();
       System.err.println("**********" + s + "****************");
       assertThat(s.length()).isGreaterThan(1000);
    }
+
+   @Test
+   public void testSRDListFromDatabase()
+   {
+      Response r = given()
+              .expect()
+              .statusCode(200)
+              .when()
+              .get(getUrl("stocks"));
+      assertThat(r.header("Content-Type")).contains("text/json");
+      String s = r.body().asString();
+      assertThat(s.length()).isGreaterThan(1000);
+      assertThat(s).contains("ADP.PA");
+      assertThat(s).contains("Vilmorin");
+      assertThat(s).contains("LU0088087324");
+   }
+
 
 }

@@ -1,5 +1,6 @@
 Install on vps
-  Migrate from tomcat to springboot
+  * Migrate from tomcat to springboot
+  * containerize (if vps ok), or ansible-ize installation
 Cron automatic daily population
 Database backup
 Cron automatic weekly SRD update
