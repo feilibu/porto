@@ -13,7 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/v1/stock/{ticker}")
+@RequestMapping("/v1/stock/{ticker:.+}")
 public class GetStockData
 {
     @RequestMapping(method= RequestMethod.GET,produces = "text/javascript")
@@ -25,6 +25,7 @@ public class GetStockData
         Quotes q = new Quotes();
         Calendar c = Calendar.getInstance();
         c.add(Calendar.YEAR, -3);
+        System.err.println("========ticker:" + ticker);
         System.err.println("========startDate:" + startDate);
         Date dEnd = parseDate(startDate, new Date());
         Date dStart = parseDate(endDate, c.getTime());
